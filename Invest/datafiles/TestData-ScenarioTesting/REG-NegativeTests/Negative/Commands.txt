@@ -1,0 +1,34 @@
+C:\Program Files (x86)\SmartBear\soapUI-4.6.0\bin
+-------------------------------------------------
+
+Mandatory Checks Scenario File
+==============================
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\QA\NegativeChecks\ScenarioFile-MandatoryFieldsFlows.xls -PSetNo=7
+
+
+Error Code Check Scenario File
+==============================
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\QA\NegativeChecks\ScenarioFile-ErrorCodesFlows.xls -PSetNo=1
+
+
+
+Mandatory Checks in Batches
+---------------------
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-MandatoryFieldsFlows.xls -PSetNo=1
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-MandatoryFieldsFlows.xls -PSetNo=2
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-MandatoryFieldsFlows.xls -PSetNo=3
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-MandatoryFieldsFlows.xls -PSetNo=4
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-MandatoryFieldsFlows.xls -PSetNo=5
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-MandatoryFieldsFlows.xls -PSetNo=6
+
+
+Error Code Checks in Batches
+--------------------------
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-ErrorCodesFlows.xls -PSetNo=1
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-ErrorCodesFlows.xls -PSetNo=2
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-ErrorCodesFlows.xls -PSetNo=3
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-ErrorCodesFlows.xls -PSetNo=4
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-ErrorCodesFlows.xls -PSetNo=5
+testrunner.bat -sAutomation_TestSuite -cAutomation_TestCase C:\Users\RaghavPal\Documents\SoapUIProjects\BBCFPAutomation2.xml -PNegativeTesting=Y -PScenarioFileLocation=C:\Users\RaghavPal\Documents\Test_Data\QATestData\TeamTestData\DailyRun\NewRefactoredTD\REG\Negative\ScenarioFile-ErrorCodesFlows.xls -PSetNo=6
+
+

@@ -1,0 +1,560 @@
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/cfp/createInvestor \
+-d api_key=eb33fa21-d032-45c1-86ec-adfaa35c5002 \
+-d secret=18PobUdD4S \
+-d first_name=BBCFPHotfix \
+-d last_name=jazzy \
+--data-urlencode email="jaspinder+Hotfix2060@bancbox.com" \
+-d phone=5555555555 \
+-d dob=1975-03-20 \
+-d ssn=112-22-3333 \
+-d address_1="222333 PEACHTREE" \
+-d city=ATLANTA \
+-d state=GA \
+-d zip=30318 \
+-d internal=1 \
+-d verification_required=0 \
+-d withdraw_on_availabilty=0 \
+-d created_by=jaspinder 
+
+{"request_id":810921612226,"id":886680579188,"bank_name":"Four Oaks Bank & Trust Company","account_number":"542745106604","account_routing_number":"053112505","account_type":"CHECKING"}
+
+
+escrow: 35321207968
+
+investor: 886680579188
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/cfp/fundEscrow \
+-d api_key=eb33fa21-d032-45c1-86ec-adfaa35c5002 \
+-d secret=18PobUdD4S \
+-d reference_id=bbcfp2060-2 \
+-d escrow_id=35321207968 \
+-d investor_id=886680579188 \
+-d amount=500 \
+-d fund_on_availability=Y \
+-d text="test data case 01" \
+-d client_ip_address="111.216.11.115" \
+-d submit_timestamp="2014-01-03 11:02:01"
+
+
+{"request_id":741445812588,"error":{"message":"ERROR: in collecting funds from investor.Either source linked external account id info is needed or new ACH info is needed."},"reference_id":"bbcfp2060-1","amount":500,"fund_on_availability":"Y","escrow_id":35321207968,"investor_id":886680579188,"funding_schedule_id":617895216858,"escrow_current_balance":1660.5,"investor_current_balance":0.0}
+
+after fix==
+
+
+* Connection #0 to host sandbox-api.bancboxcrowd.com left intact
+{"request_id":145774349941,"error":{"message":"ERROR: in collecting funds from investor.Either source linked external account id info is needed or new ACH info is needed."},"reference_id":"bbcfp2060-2","amount":500,"fund_on_availability":"Y","escrow_id":35321207968,"investor_id":886680579188,"funding_schedule_id":388405418577,"escrow_current_balance":2160.5,"investor_current_balance":50.0}
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/cfp/fundAccount \
+-d api_key=eb33fa21-d032-45c1-86ec-adfaa35c5002 \
+-d secret=18PobUdD4S \
+-d agreement_type="CLICKTHROUGH" \
+-d document_name="VIBGYuO" \
+-d document_version=1 \
+-d document_text="my text" \
+-d client_ip_address="111.216.11.115" \
+-d submit_timestamp="2013-06-06 01:01:01" \
+-d text=testdata \
+-d represented_signature="heloo" \
+-d investor_id=886680579188 \
+-d bank_account_number="2352154" \
+-d bank_account_type="SAVING" \
+-d bank_account_holder="James" \
+-d bank_account_routing="322271724" \
+-d link_bank_account="Y" \
+-d reference_id=bbX_003nxbu-2 \
+-d amount=550 \
+-d memo=memo1
+
+
+{"request_id":499560087809,"status":1,"transaction_details":{"id":10231791,"reference_id":"bbX_003nxbu","status":"IN_PROCESS","trans_status":1},"linked_external_account":{"id":158314},"current_balance":0.00}
+
+after fix=
+
+{"request_id":186720115668,"status":1,"transaction_details":{"id":10231797,"reference_id":"bbX_003nxbu-2","status":"IN_PROCESS","trans_status":1},"linked_external_account":{"id":158329},"current_balance":50.00}
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/cfp/getInvestorDetails \
+-d api_key=eb33fa21-d032-45c1-86ec-adfaa35c5002 \
+-d secret=18PobUdD4S \
+-d investor_id=886680579188
+
+
+{"request_id":772272037871,"id":886680579188,"status":"ACTIVE","cipStatus":"IGNORED","first_name":"BBCFPHotfix","last_name":"jazzy","email":"jaspinder+Hotfix2060@bancbox.com","phone":"5555555555","dob":"1975-03-20","ssn":"112-22-3333","funds":550.00,"pendingbalance":550.00,"address":{"address_1":"222333 PEACHTREE","city":"ATLANTA","state":"GA","zip":"30318"},"type":"STANDARD","fund_account_events":[{"bbx_activity_id":10231791,"bbx_activity_status":"COMPLETED","date_funded":"2014-01-03","amount":550.00,"method":"ACH","status":"SUCCESS"},{"date_funded":"2014-01-03","amount":550.00,"method":"ACH","status":"FAILED"}],"audit_info":{"created_on":"2014-01-03","created_by":"jaspinder","modified_on":"2014-01-03","modified_by":"jaspinder"},"account_info":{"bank_name":"Four Oaks Bank & Trust Company","account_number":"542745106604","account_routing_number":"053112505","account_type":"CHECKING","account_holder_name":"BBCFPHotfix jazzy"}}
+
+
+after fix:
+
+
+{"request_id":84395407835,"id":886680579188,"status":"ACTIVE","cipStatus":"IGNORED","first_name":"BBCFPHotfix","last_name":"jazzy","email":"jaspinder+Hotfix2060@bancbox.com","phone":"5555555555","dob":"1975-03-20","ssn":"112-22-3333","funds":100.00,"pendingbalance":100.00,"address":{"address_1":"222333 PEACHTREE","city":"ATLANTA","state":"GA","zip":"30318"},"type":"STANDARD","investments":[{"cfp_name":"Testmail2","project":"TestSandEscBalNoti","amount":1000.00,"goal":100.00,"goal_percentage":1000.00,"end_date":"2014-01-31","is_refunded":"N","is_cfp_fee_refunded":"N","investment_date":"2014-01-03","is_reversed":"NO","can_reverse":"NO","escrow_id":35321207968}],"fund_account_events":[{"bbx_activity_id":10231791,"bbx_activity_status":"COMPLETED","date_funded":"2014-01-03","amount":550.00,"method":"ACH","status":"SUCCESS"},{"date_funded":"2014-01-03","amount":550.00,"method":"ACH","status":"FAILED"},{"bbx_activity_id":10231797,"bbx_activity_status":"COMPLETED","date_funded":"2014-01-03","amount":550.00,"method":"ACH","status":"SUCCESS"}],"audit_info":{"created_on":"2014-01-03","created_by":"jaspinder","modified_on":"2014-01-03","modified_by":"jaspinder"},"account_info":{"bank_name":"Four Oaks Bank & Trust Company","account_number":"542745106604","account_routing_number":"053112505","account_type":"CHECKING","account_holder_name":"BBCFPHotfix jazzy"}}
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/cfp/createIssuer \
+-d api_key=eb33fa21-d032-45c1-86ec-adfaa35c5002 \
+-d secret=18PobUdD4S \
+-d first_name=BBCFPINTISS \
+-d last_name=jazzy \
+--data-urlencode email="jaspinder+INTISS2163@bancbox.com" \
+-d phone=5555555555 \
+-d dob=1975-03-20 \
+-d ssn=112-22-3333 \
+-d address_1="222333 PEACHTREE" \
+-d city=ATLANTA \
+-d state=GA \
+-d zip=30318 \
+-d internal=1 \
+-d verification_required=0 \
+-d withdraw_on_availabilty=0 \
+-d created_by=jaspinder 
+
+
+* Connection #0 to host sandbox-api.bancboxcrowd.com left intact
+{"request_id":257844484764,"id":476898894375,"bank_name":"Four Oaks Bank & Trust Company","account_number":"542745107406","account_routing_number":"053112505","account_type":"CHECKING"}
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/cfp/createEscrowAccount \
+-d api_key=eb33fa21-d032-45c1-86ec-adfaa35c5002 \
+-d secret=18PobUdD4S \
+-d name=BETAWEBHOOKHJP1 \
+-d reference_id=BETAWEBHOOKHJP1 \
+-d issuer_id=476898894375 \
+-d start_date=2014-01-03 \
+-d close_date=2014-10-03 \
+-d funding_goal=100 \
+-d over_funding_amount=200000 \
+-d contract_doc_reference_id=contractDofRefIds \
+-d contract_term_reference_id=contractTermRefIds \
+-d minimum_funding_amount=10 \
+-d maximum_funding_amount=100 \
+-d securities_offered=EQUITY \
+-d contract_doc_filename=contactFilename \
+-d contract_doc_file_type=txt \
+-d created_by=Jiah \
+-d deal=0
+
+
+{"request_id":636419600114,"error":{"type":"W-001","message":"No platform signatory information was received, so default was used. Default platform signatory is $NAME, $TITLE, $EMAIL."},"id":965301475161,"reference_id":"BETAWEBHOOKHJP1","project_name":"BETAWEBHOOKHJP1","current_balance":0.00,"total_funding":0.00,"status":"OPEN PENDING","platform_signatory_name":"Jaspinder Torrs","platform_signatory_title":"Crowdfunding Portal","platform_signatory_email":"jaspinder+1234@bancbox.com","issuer_id":476898894375,"issuer_signatory_name":"BBCFPINTISS jazzy","issuer_signatory_title":"Issuer","issuer_signatory_email":"jaspinder+INTISS2163@bancbox.com","minimum":10.00,"maximum":100.00,"start_date":"2014-01-03","close_date":"2014-10-03","securities_offered":"EQUITY","contract_reference_id":"contractDofRefIds","initiated_on":"2014-01-03","initiated_by":"Jiah","modified_on":"2014-01-03","modified_by":"Jiah"}
+
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/escrow/acceptEscrow \
+-d preSharedKey=DZzXwvNbW6z2sQ \
+-d Id=965301475161
+
+{"requestId":586780141727,"accountId":542745108208}
+
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/cfp/cancelEscrow \
+-d api_key=eb33fa21-d032-45c1-86ec-adfaa35c5002 \
+-d secret=18PobUdD4S \
+-d escrow_id=965301475161 \
+-d reference_id=BETAWEBHOOKHJP1 \
+-d reason=GOAL_NOT_MET \
+-d reason_other=
+
+
+{"request_id":657268263292,"id":965301475161,"reference_id":"BETAWEBHOOKHJP1","project_name":"BETAWEBHOOKHJP1","current_balance":0.00,"total_funding":0.00,"status":"CANCEL PENDING","platform_signatory_name":"Jaspinder Torrs","platform_signatory_title":"Crowdfunding Portal","platform_signatory_email":"jaspinder+1234@bancbox.com","issuer_id":476898894375,"issuer_signatory_name":"BBCFPINTISS jazzy","issuer_signatory_title":"Issuer","issuer_signatory_email":"jaspinder+INTISS2163@bancbox.com","minimum":10.00,"maximum":100.00,"start_date":"2014-01-03","securities_offered":"EQUITY","escrow_investors":[],"contract_reference_id":"contractDofRefIds","initiated_on":"2014-01-03","initiated_by":"Jiah","created_on":"2014-01-03","modified_on":"2014-01-03","modified_by":"Jiah"}
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/escrow/completeCancelEscrow \
+-d preSharedKey=DZzXwvNbW6z2sQ \
+-d Id=965301475161 \
+-d reason=FAILURE \
+-d cfpId=694399859232
+
+
+{"requestId":571539123904,"successItems":[],"failedItems":[],"returned_amount":0}
+
+
+
+
+
+
+
+
+
+==========================================BETA=================================
+cfpid=355266613255
+e-mail id: jaspinder+23@bancbox.com
+username=Jaspinder23_1
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/createIssuer \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d first_name=BetaNotiIss \
+-d last_name=jazzy \
+--data-urlencode email="jaspinder+BetaNotiIss2060@bancbox.com" \
+-d phone=5555555555 \
+-d dob=1975-03-20 \
+-d ssn=112-22-3333 \
+-d address_1="222333 PEACHTREE" \
+-d city=ATLANTA \
+-d state=GA \
+-d zip=30318 \
+-d internal=1 \
+-d verification_required=0 \
+-d withdraw_on_availabilty=0 \
+-d created_by=jaspinder 
+
+
+{"request_id":490994992247,"id":85952513174,"bank_name":"Four Oaks Bank & Trust Company","account_number":"540126102473","account_routing_number":"053112505","account_type":"CHECKING"}
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/createInvestor \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d first_name=BetaNotiInv \
+-d last_name=jazzy \
+--data-urlencode email="jaspinder+BetaNotiInv2060@bancbox.com" \
+-d phone=5555555555 \
+-d dob=1975-03-20 \
+-d ssn=112-22-3333 \
+-d address_1="222333 PEACHTREE" \
+-d city=ATLANTA \
+-d state=GA \
+-d zip=30318 \
+-d internal=1 \
+-d verification_required=0 \
+-d withdraw_on_availabilty=0 \
+-d created_by=jaspinder 
+
+
+{"request_id":289174991648,"id":486218100707,"bank_name":"Four Oaks Bank & Trust Company","account_number":"540126102812","account_routing_number":"053112505","account_type":"CHECKING"}
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/fundEscrow \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d reference_id=vc88888v \
+-d escrow_id=863486178532 \
+-d investor_id=486218100707 \
+-d amount=150 \
+-d fund_on_availability=Y \
+-d text="test data" \
+-d client_ip_address="111.216.11.115" \
+-d submit_timestamp="2013-06-06 01:01:01" 
+
+
+{"request_id":196419811183,"error":{"message":"ERROR: in collecting funds from investor.Either source linked external account id info is needed or new ACH info is needed."},"reference_id":"vc88888v","amount":150,"fund_on_availability":"Y","escrow_id":863486178532,"investor_id":486218100707,"funding_schedule_id":513950598918,"escrow_current_balance":0,"investor_current_balance":0.0}
+
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/fundAccount \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d agreement_type="CLICKTHROUGH" \
+-d document_name="VIBGYuO" \
+-d document_version=1 \
+-d document_text="my text" \
+-d client_ip_address="111.216.11.115" \
+-d submit_timestamp="2013-06-06 01:01:01" \
+-d text=testdata \
+-d represented_signature="heloo" \
+-d investor_id=486218100707 \
+-d bank_account_number="2352154" \
+-d bank_account_type="SAVING" \
+-d bank_account_holder="James" \
+-d bank_account_routing="322271724" \
+-d link_bank_account="Y" \
+-d reference_id=bbX_003nxbuss \
+-d amount=50 \
+-d memo=memo1
+
+1..
+{"request_id":447654328315,"status":1,"transaction_details":{"id":820977,"reference_id":"bbX_003nxbuss","status":"IN_PROCESS","trans_status":1},"linked_external_account":{"id":501472},"current_balance":0.00}
+
+2..
+
+{"request_id":50022602172,"status":1,"transaction_details":{"id":820978,"reference_id":"bbX_003nxbusnmms","status":"IN_PROCESS","trans_status":1},"linked_external_account":{"id":501479},"current_balance":0.00}
+
+
+{"request_id":876182531655,"error":{"message":"ERROR: in collecting funds from investor.Either source linked external account id info is needed or new ACH info is needed."},"reference_id":"vc88888v","amount":150,"fund_on_availability":"Y","escrow_id":863486178532,"investor_id":486218100707,"funding_schedule_id":399360756291,"escrow_current_balance":0,"investor_current_balance":0.0}
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/escrow/acceptEscrow \
+-d preSharedKey=baje5ja6quon \
+-d Id=680797496727
+
+
+
+{"requestId":646695514006,"accountId":540126103227}
+
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/fundEscrow \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d reference_id=vc88888v1 \
+-d escrow_id=680797496727 \
+-d investor_id=486218100707 \
+-d amount=500 \
+-d fund_on_availability=Y \
+-d text="test data" \
+-d client_ip_address="111.216.11.115" \
+-d submit_timestamp="2013-06-06 01:01:01" 
+
+
+* Connection #0 to host beta-api.bancboxcrowd.com left intact
+{"request_id":328072051835,"error":{"message":"ERROR: in collecting funds from investor.Either source linked external account id info is needed or new ACH info is needed."},"reference_id":"vc88888v","amount":500,"fund_on_availability":"Y","escrow_id":680797496727,"investor_id":486218100707,"funding_schedule_id":677271627045,"escrow_current_balance":0,"investor_current_balance":300.0}
+
+
+
+{"request_id":278513749101,"error":{"message":"ERROR: in collecting funds from investor.Either source linked external account id info is needed or new ACH info is needed."},"reference_id":"vc88888v1","amount":500,"fund_on_availability":"Y","escrow_id":680797496727,"investor_id":486218100707,"funding_schedule_id":689703588498,"escrow_current_balance":400,"investor_current_balance":0.0}
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/fundAccount \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d agreement_type="CLICKTHROUGH" \
+-d document_name="VIBGYuO" \
+-d document_version=1 \
+-d document_text="my text" \
+-d client_ip_address="111.216.11.115" \
+-d submit_timestamp="2013-06-06 01:01:01" \
+-d text=testdata \
+-d represented_signature="heloo" \
+-d investor_id=486218100707 \
+-d bank_account_number="2352154" \
+-d bank_account_type="SAVING" \
+-d bank_account_holder="James" \
+-d bank_account_routing="322271724" \
+-d link_bank_account="Y" \
+-d reference_id=bbX_003nxbuxxszs \
+-d amount=500 \
+-d memo=memo1
+
+
+{"request_id":668650827049,"status":1,"transaction_details":{"id":820999,"reference_id":"bbX_003nxbuxxss","status":"IN_PROCESS","trans_status":1},"linked_external_account":{"id":501492},"current_balance":300.00}
+
+
+
+* Connection #0 to host beta-api.bancboxcrowd.com left intact
+{"request_id":95738872406,"status":1,"transaction_details":{"id":821023,"reference_id":"bbX_003nxbuxxszs","status":"IN_PROCESS","trans_status":1},"linked_external_account":{"id":501506},"current_balance":0.00}
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/disburseEscrow \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d escrow_id=680797496727 \
+-d reference_id=betaescrowdisburse \
+-d reason=GOAL_MET \
+-d close_escrow_disbursal=NO \
+-d issuer_disbursal_amount=100 
+
+
+{"request_id":58793105963,"escrow_id":680797496727,"reference_id":"betaescrowdisburse","reason":"GOAL_MET","close_escrow_disbursal":"NO","issuer_disbursal_amount":100.00,"requested_date":"2014-01-03","status":1}
+
+
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/createInvestor \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d first_name=BetaNotiInvStd \
+-d last_name=jazzy \
+--data-urlencode email="jaspinder+BetaNotiSTd2060@bancbox.com" \
+-d phone=5555555555 \
+-d dob=1975-03-20 \
+-d ssn=112-22-3333 \
+-d address_1="222333 PEACHTREE" \
+-d city=ATLANTA \
+-d state=GA \
+-d zip=30318 \
+-d created_by=jaspinder 
+
+
+
+{"request_id":934631217584,"id":471152869199,"bank_name":"Four Oaks Bank & Trust Company","account_number":"540126102687","account_routing_number":"053112505","account_type":"CHECKING"}
+Jaspinder@LenovoBBX1 ~
+
+
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/fundEscrow \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d reference_id=vc88888v \
+-d escrow_id=680797496727 \
+-d investor_id=471152869199 \
+-d amount=100 \
+-d fund_on_availability=Y \
+-d text="test data" \
+-d client_ip_address="111.216.11.115" \
+-d submit_timestamp="2013-06-06 01:01:01" 
+
+
+
+* Connection #0 to host beta-api.bancboxcrowd.com left intact
+{"request_id":104381850363,"reference_id":"vc88888v","amount":100,"fund_on_availability":"Y","escrow_id":680797496727,"investor_id":471152869199,"funding_schedule_id":23021643355,"escrow_current_balance":400,"investor_current_balance":0.0}
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/createEscrowAccount \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d name=BETAWEBHOOKHJP1 \
+-d reference_id=BETAWEBHOOKHJP1 \
+-d issuer_id=85952513174 \
+-d start_date=2014-01-03 \
+-d close_date=2014-10-03 \
+-d funding_goal=100 \
+-d over_funding_amount=200000 \
+-d contract_doc_reference_id=contractDofRefIds \
+-d contract_term_reference_id=contractTermRefIds \
+-d minimum_funding_amount=10 \
+-d maximum_funding_amount=100 \
+-d securities_offered=EQUITY \
+-d contract_doc_filename=contactFilename \
+-d contract_doc_file_type=txt \
+-d created_by=Jiah \
+-d deal=0
+
+
+{"request_id":556279847634,"error":{"type":"W-001","message":"No platform signatory information was received, so default was used. Default platform signatory is $NAME, $TITLE, $EMAIL."},"id":508438439313,"reference_id":"BETAWEBHOOKHJP1","project_name":"BETAWEBHOOKHJP1","current_balance":0.00,"total_funding":0.00,"status":"OPEN PENDING","platform_signatory_name":"Jaspinder Kaur","platform_signatory_title":"Crowdfunding Portal","platform_signatory_email":"jaspinder+23@bancbox.com","issuer_id":85952513174,"issuer_signatory_name":"BetaNotiIss jazzy","issuer_signatory_title":"Issuer","issuer_signatory_email":"jaspinder+BetaNotiIss2060@bancbox.com","minimum":10.00,"maximum":100.00,"start_date":"2014-01-03","close_date":"2014-10-03","securities_offered":"EQUITY","contract_reference_id":"contractDofRefIds","initiated_on":"2014-01-03","initiated_by":"Jiah","modified_on":"2014-01-03","modified_by":"Jiah"}
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/createIssuer \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d first_name=BetaNotiIssStd \
+-d last_name=jazzy \
+--data-urlencode email="jaspinder+BetaNotiSTdISS2060@bancbox.com" \
+-d phone=5555555555 \
+-d dob=1975-03-20 \
+-d ssn=112-22-3333 \
+-d address_1="222333 PEACHTREE" \
+-d city=ATLANTA \
+-d state=GA \
+-d zip=30318 \
+-d created_by=jaspinder 
+
+
+{"request_id":653791408108,"id":487704856834,"bank_name":"Four Oaks Bank & Trust Company","account_number":"540126104180","account_routing_number":"053112505","account_type":"CHECKING"}
+Jaspinder@LenovoBBX1 ~
+
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/cfp/createEscrowAccount \
+-d api_key=71c9db32-702d-452d-bfcb-5875c2471217 \
+-d secret=k0r2nAk47M \
+-d name=BETAWEBHOOKSTDISS \
+-d reference_id=BETAWEBHOOKSTDISS \
+-d issuer_id=487704856834 \
+-d start_date=2014-01-03 \
+-d close_date=2014-10-03 \
+-d funding_goal=100 \
+-d over_funding_amount=20000 \
+-d contract_doc_reference_id=contractDofRefIds \
+-d contract_term_reference_id=contractTermRefIds \
+-d minimum_funding_amount=10 \
+-d maximum_funding_amount=1000 \
+-d securities_offered=EQUITY \
+-d contract_doc_filename=contactFilename \
+-d contract_doc_file_type=txt \
+-d created_by=Jazz \
+-d deal=0
+
+
+
+{"request_id":471930886107,"error":{"type":"W-001","message":"No platform signatory information was received, so default was used. Default platform signatory is $NAME, $TITLE, $EMAIL."},"id":512137373538,"reference_id":"BETAWEBHOOKSTDISS","project_name":"BETAWEBHOOKSTDISS","current_balance":0.00,"total_funding":0.00,"status":"OPEN PENDING","platform_signatory_name":"Jaspinder Kaur","platform_signatory_title":"Crowdfunding Portal","platform_signatory_email":"jaspinder+23@bancbox.com","issuer_id":487704856834,"issuer_signatory_name":"BetaNotiIssStd jazzy","issuer_signatory_title":"Issuer","issuer_signatory_email":"jaspinder+BetaNotiSTdISS2060@bancbox.com","minimum":10.00,"maximum":1000.00,"start_date":"2014-01-03","close_date":"2014-10-03","securities_offered":"EQUITY","contract_reference_id":"contractDofRefIds","initiated_on":"2014-01-03","initiated_by":"Jazz","modified_on":"2014-01-03","modified_by":"Jazz"}
+
+
+
+
+
+
+
+
+
+
+
+curl -k -v https://secure.bancboxcrowd.com/crowd/v0/escrow/createUser \
+-d preSharedKey=JDk4854kfiuf \
+-d userId=bwilson@bancbox.com \
+-d fName=Bill \
+-d lName=Wilson \
+-d email=bwilson@bancbox.com \
+-d password=bwilson \
+-d created_by=mohit
+
+curl -k -v https://beta-api.bancboxcrowd.com/crowd/v0/escrow/createCfp \
+-d preSharedKey=baje5ja6quon \
+-d name=Bill \
+-d UserName=bwilson@bancbox.com \
+-d Password=bwilson \
+-d RedirectUrl=www.google.com \
+-d WebhookUrl=https://qaui1.cftpay.com/webhook.php \
+-d CompanyName=NotificationComp \
+-d WebSiteUrl=www.bancbox.com \
+-d BusDescription=Payment \
+-d fName=Bill \
+-d lName=Wilson \
+-d email=bwilson@bancbox.com \
+-d phone=9876543210 \
+-d a_1=US \
+-d a_t=US \
+-d a_c=US \
+-d a_s=NY \
+-d a_z=12345 \
+-d refId=bwilson \
+-d created_by=Mohit \
+-d echeck_method=ACH
+
+
+{"requestId":704824636754,"id":776318302693,"accountId":540126104002,"temporary_fee_account":540126103482}
+for beta===>>
+api_key=0de268f5-912a-4f53-957b-61fcb7127bf0
+secret=VL7Le8csSc
+
+
+curl -k -v https://sandbox-api.bancboxcrowd.com/crowd/v0/escrow/createCfp \
+-d preSharedKey=DZzXwvNbW6z2sQ \
+-d name=Bill \
+-d UserName=bwilson@bancbox.com \
+-d Password=bwilson \
+-d RedirectUrl=www.google.com \
+-d WebhookUrl=https://qaui1.cftpay.com/webhook.php \
+-d CompanyName=NotificationComp \
+-d WebSiteUrl=www.bancbox.com \
+-d BusDescription=Payment \
+-d fName=Bill \
+-d lName=Wilson \
+-d email=bwilson@bancbox.com \
+-d phone=9876543210 \
+-d a_1=US \
+-d a_t=US \
+-d a_c=US \
+-d a_s=NY \
+-d a_z=12345 \
+-d refId=bwilson \
+-d created_by=Mohit \
+-d echeck_method=ACH
+
+
+{"requestId":516838443844,"id":42774083632,"accountId":542745108848,"temporary_fee_account":542745107609}
+
+curl -k -v https://api.bancboxcrowd.com/crowd/v0/escrow/createCfp \
+-d preSharedKey=JDk4854kfiuf \
+-d name=Bill \
+-d UserName=bwilson@bancbox.com \
+-d Password=bwilson \
+-d RedirectUrl=www.google.com \
+-d WebhookUrl="https://cftpay.com/webhook.php" \
+-d CompanyName=NotificationComp \
+-d WebSiteUrl=www.bancbox.com \
+-d BusDescription=Payment \
+-d fName=Bill \
+-d lName=Wilson \
+-d email=bwilson@bancbox.com \
+-d phone=9876543210 \
+-d a_1=US \
+-d a_t=US \
+-d a_c=US \
+-d a_s=NY \
+-d a_z=12345 \
+-d refId=bwilson \
+-d created_by=Mohit \
+-d echeck_method=ACH
+
+using soap==
+{    "requestId": 700373348161,    "id": 847297561143,    "accountId": 540126102628,    "temporary_fee_account": 540126102679 }

@@ -1,0 +1,6 @@
+1. Refresh OpenEscro - to bring start date to current date - once a day
+2. Refresh creatProceedSchedules - for current date - once a day
+3. Refresh createInvestor - to change the random reference ids - before every run
+4. Refresh createIssuer - to change the random reference ids - before every run  TC_003
+5. Check in soapUI parameters right path of the scenario file is mentioned.
+ 
